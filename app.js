@@ -40,8 +40,14 @@ console.dir(display)
 
 
 const numberOnclick = function(event){
+  if(flag == 1){
 
+    display.innerText = event.target.textContent
+    flag = 0
+  }
+else{
   display.innerText += event.target.textContent
+}
 }
 
 btnNine.onclick = numberOnclick
@@ -98,6 +104,26 @@ switch(selectedOperator){
 }
 
 display.innerText = result
+  flag = 1
 }
 
+  btnMLess.onclick = function(event){
+  secondValue = parseFloat(display.innerText)
+  result = result - secondValue
+  display.innerText = result
+  flag = 1
+}
+
+btnMMore.onclick = function(event){
+  secondValue = parseFloat(display.innerText)
+  result = result + secondValue
+  display.innerText = result
+  flag = 1
+}
+
+btnMC.onclick = function(event){
+
+  result = 0
+}
+  
 }
