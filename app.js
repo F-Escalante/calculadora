@@ -4,7 +4,9 @@ window.onload = function() {
 
 let firstValue
 let selectedOperator
-
+let secondValue
+let flag
+let result
 const display = document.getElementById("display")
 
 
@@ -82,29 +84,28 @@ btnLess.onclick = operatorFunction
 
 btnEquals.onclick = function(event){
 
-secondValue = parseFloat(display.innerText)
-let result
+const options = {
 
-switch(selectedOperator){
+  baseURL: "http://localhost:3000/",
+  timeout: 5000,
+  method: "GET",
+  headers: {
 
-  case '+':
-  result = firstValue + secondValue
-  break;
-  case '-':
-  result = firstValue - secondValue
-  break;
-  case '/':
-  result = firstValue / secondValue
-  break;
-  case '*':
-  result = firstValue * secondValue
-  break;
+    "Content-Type": "application/json",
 
-
+  }
 }
+secondValue = parseFloat(display.innerText)
+  fetch(`http://localhost:3000/getresult/${firstValue}/${secondValue}/${selectedOperator}`, options)
+  .then(res => res.json())
+  .then((response) => {
+    console.log(response)
+    display.innerText = response.result
+    flag = 1
+  })
 
-display.innerText = result
-  flag = 1
+//secondValue = parseFloat(display.innerText)
+
 }
 
   btnMLess.onclick = function(event){
@@ -125,5 +126,5 @@ btnMC.onclick = function(event){
 
   result = 0
 }
-  
+
 }
