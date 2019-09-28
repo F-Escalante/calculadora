@@ -2,39 +2,39 @@
 
 window.onload = function() {
 
-let firstValue
-let selectedOperator
-let secondValue
-let flag
-let result
-const display = document.getElementById("display")
+  let firstValue
+  let selectedOperator
+  let secondValue
+  let flag
+  let result
+  const display = document.getElementById("display")
 
 
-const btnMC = document.getElementById("btnMC")
-const btnMMore = document.getElementById("btnMMore")
-const btnMLess = document.getElementById("btnMLess")
-const btnDiv = document.getElementById("btnDiv")
-const btnSeven = document.getElementById("btnSeven")
-const btnEight = document.getElementById("btnEight")
-const btnNine = document.getElementById("btnNine")
-const btnMult = document.getElementById("btnMult")
-const btnFour = document.getElementById("btnFour")
-const btnFive = document.getElementById("btnFive")
-const btnSix = document.getElementById("btnSix")
-const btnLess = document.getElementById("btnLess")
-const btnOne = document.getElementById("btnOne")
-const btnTwo = document.getElementById("btnTwo")
-const btnTree = document.getElementById("btnTree")
-const btnMore = document.getElementById("btnMore")
-const btnC = document.getElementById("btnC")
-const btnZero = document.getElementById("btnZero")
-const btnPoint = document.getElementById("btnPoint")
-const btnEquals = document.getElementById("btnEquals")
+  const btnMC = document.getElementById("btnMC")
+  const btnMMore = document.getElementById("btnMMore")
+  const btnMLess = document.getElementById("btnMLess")
+  const btnDiv = document.getElementById("btnDiv")
+  const btnSeven = document.getElementById("btnSeven")
+  const btnEight = document.getElementById("btnEight")
+  const btnNine = document.getElementById("btnNine")
+  const btnMult = document.getElementById("btnMult")
+  const btnFour = document.getElementById("btnFour")
+  const btnFive = document.getElementById("btnFive")
+  const btnSix = document.getElementById("btnSix")
+  const btnLess = document.getElementById("btnLess")
+  const btnOne = document.getElementById("btnOne")
+  const btnTwo = document.getElementById("btnTwo")
+  const btnTree = document.getElementById("btnTree")
+  const btnMore = document.getElementById("btnMore")
+  const btnC = document.getElementById("btnC")
+  const btnZero = document.getElementById("btnZero")
+  const btnPoint = document.getElementById("btnPoint")
+  const btnEquals = document.getElementById("btnEquals")
 
 
-//console.log(btnOne)
-/*btnOne.onclick = function(event){
-display.innerText += event.target.textContent
+  //console.log(btnOne)
+  /*btnOne.onclick = function(event){
+  display.innerText += event.target.textContent
 }*/
 
 
@@ -47,9 +47,9 @@ const numberOnclick = function(event){
     display.innerText = event.target.textContent
     flag = 0
   }
-else{
-  display.innerText += event.target.textContent
-}
+  else{
+    display.innerText += event.target.textContent
+  }
 }
 
 btnNine.onclick = numberOnclick
@@ -84,31 +84,61 @@ btnLess.onclick = operatorFunction
 
 btnEquals.onclick = function(event){
 
-const options = {
+  const options = {
 
-  baseURL: "http://localhost:3000/",
-  timeout: 5000,
-  method: "GET",
-  headers: {
+    baseURL: "http://localhost:3000/",
+    timeout: 5000,
+    method: "GET",
+    headers: {
 
-    "Content-Type": "application/json",
+      "Content-Type": "application/json",
 
+    }
+  }
+  secondValue = parseFloat(display.innerText)
+  
+  switch(selectedOperator){
+
+    case '+':
+    fetch(`http://localhost:3000/getresultSuma/${firstValue}/${secondValue}`, options)
+    .then(res => res.json())
+    .then((response) => {
+      console.log(response)
+      display.innerText = response.result
+      flag = 1
+    })
+    break;
+    case '-':
+    fetch(`http://localhost:3000/getresultResta/${firstValue}/${secondValue}`, options)
+    .then(res => res.json())
+    .then((response) => {
+      console.log(response)
+      display.innerText = response.result
+      flag = 1
+    })
+    break;
+    case '÷':
+    fetch(`http://localhost:3000/getresultDividir/${firstValue}/${secondValue}`, options)
+    .then(res => res.json())
+    .then((response) => {
+      console.log(response)
+      display.innerText = response.result
+      flag = 1
+    })
+    break;
+    case '*':
+    fetch(`http://localhost:3000/getresultMultiplicar/${firstValue}/${secondValue}`, options)
+    .then(res => res.json())
+    .then((response) => {
+      console.log(response)
+      display.innerText = response.result
+      flag = 1
+    })
+    break;
   }
 }
-secondValue = parseFloat(display.innerText)
-  fetch(`http://localhost:3000/getresult/${firstValue}/${secondValue}/${selectedOperator}`, options)
-  .then(res => res.json())
-  .then((response) => {
-    console.log(response)
-    display.innerText = response.result
-    flag = 1
-  })
 
-//secondValue = parseFloat(display.innerText)
-
-}
-
-  btnMLess.onclick = function(event){
+btnMLess.onclick = function(event){
   secondValue = parseFloat(display.innerText)
   result = result - secondValue
   display.innerText = result
@@ -126,5 +156,4 @@ btnMC.onclick = function(event){
 
   result = 0
 }
-
 }

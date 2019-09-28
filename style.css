@@ -74,5 +74,21 @@
   font-family: "Lucida Console", Monaco, monospace;
   list-style-type: none;
   float: left;
+  cursor: pointer;
+}
 
+#buttons ul li.button:hover{
+
+  background-position-y: -27px;
+}
+
+#buttons ul li.button:active{
+
+  background-position-y: -54px;
+}
+
+.disable-select {
+
+  user-select: none;
+  -ms -user -select: none;
 }
